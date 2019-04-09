@@ -5,6 +5,7 @@ node_js:
 install:
   - mkdir node_modules
   - npm install newman
+  - npm install
 
 before_script:
   - node --version
