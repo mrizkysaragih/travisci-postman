@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "f0043c87-bd50-494d-8d90-2ebc2dcaa1a4",
+		"name": "travisci-postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/ping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc6eebb7-6fc1-496a-84ff-b83374276394",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/ping",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "8.2.1"
+
+install:
+  - mkdir node_modules
+  - npm install newman
+  - npm install
+
+before_script:
+  - node --version
+  - npm --version
+  - node_modules/.bin/newman --version
+
+
+script:
+  - npm start &
+  - node_modules/.bin/newman run postman/travisci-postman.postman_collection.json -e postman/development.postman_environment.json --color auto --disable-unicode
+
+after_script:
+  - npm stop
