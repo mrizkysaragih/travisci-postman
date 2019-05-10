@@ -2,16 +2,35 @@ language: node_js
 node_js:
   - "8.2.1"
 
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
+
 install:
   - mkdir node_modules
   - npm install newman
+  - npm install mysql
   - npm install
+
+before_install:
+  - mysql -e 'CREATE DATABASE travisci_postman;'
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root12345') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade -u root -proot12345
+  - sudo service mysql restart
+  - mysql -D travisci_postman -u root --password="root12345" < mysql/create_table/comment.sql
+  - mysql -D travisci_postman -u root --password="root12345" < mysql/init_data/comment.sql
 
 before_script:
   - node --version
-  - npm --version
+  - npm  --version
   - node_modules/.bin/newman --version
 
+services:
+  - mysql
 
 script:
   - npm start &

@@ -42,6 +42,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "/comment/detail/$id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc6eebb7-6fc1-496a-84ff-b83374276394",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"matching content\", function () {",
+							"    var jsonData = pm.response.json();  ",
+							"    pm.expect(jsonData.data[0].content).to.equal('komen init');",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/comment/detail/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"comment",
+						"detail",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
